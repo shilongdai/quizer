@@ -37,6 +37,9 @@ public class MainUI {
 	private QuestionAddDialog mAddQuestion;
 	private SelectListener mSelecter;
 	private SessionDialog mAnsweringDialog;
+	private ModifyCategoryDialog modifyCategory;
+	private ModifyGroupDialog modifyGroup;
+	private ModifyQuestionDialog modifyQuestion;
 
 	/**
 	 * Launch the application.
@@ -61,6 +64,7 @@ public class MainUI {
 			}
 		}
 		EventQueue.invokeLater(new Runnable() {
+			@Override
 			public void run() {
 				try {
 					MainUI window = new MainUI();
@@ -90,6 +94,13 @@ public class MainUI {
 		root = new DefaultMutableTreeNode("QuestionBank");
 		treeModal = new DefaultTreeModel(root);
 		mSelecter = new SelectListener(mBank);
+		mAddCategory = new AddCategoryDialog(mBank, this);
+		mAddGroupDialog = new AddGroupDialog(mBank, this);
+		mAddQuestion = new QuestionAddDialog(mBank, this);
+		mAnsweringDialog = new SessionDialog(mBank);
+		modifyCategory = new ModifyCategoryDialog(mBank, this);
+		modifyGroup = new ModifyGroupDialog(mBank, this);
+		modifyQuestion = new ModifyQuestionDialog(mBank, this);
 		initialize();
 	}
 
@@ -171,6 +182,22 @@ public class MainUI {
 		toolBar.add(btnDelete);
 
 		JButton btnModify = new JButton("Modify");
+		btnModify.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (mBank.isCategorySelected() && !mBank.isGroupSelected()) {
+					modifyCategory.setVisible(true);
+				} else if (mBank.isGroupSelected()
+						&& !mBank.isQuestionSelected()) {
+					modifyGroup.setVisible(true);
+				} else if (mBank.isQuestionSelected()) {
+					modifyQuestion.setVisible(true);
+				}
+
+			}
+
+		});
 		toolBar.add(btnModify);
 
 		JButton btnNewButton_1 = new JButton("View");
@@ -187,6 +214,7 @@ public class MainUI {
 		scrollPane.setViewportView(tree);
 
 		btnNewButton.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				if (!mBank.isCategorySelected()) {
 					mAddCategory.setVisible(true);
@@ -200,10 +228,6 @@ public class MainUI {
 			}
 		});
 
-		mAddCategory = new AddCategoryDialog(mBank, this);
-		mAddGroupDialog = new AddGroupDialog(mBank, this);
-		mAddQuestion = new QuestionAddDialog(mBank, this);
-		mAnsweringDialog = new SessionDialog(mBank);
 	}
 
 	public void refreshTree() {

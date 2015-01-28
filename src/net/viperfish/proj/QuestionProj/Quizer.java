@@ -336,6 +336,10 @@ public class Quizer {
 		return new Question(currentQuizQuestion);
 	}
 
+	public Question getCurrentQuestion() {
+		return currentQuestion;
+	}
+
 	/**
 	 * increment score by 1
 	 */
