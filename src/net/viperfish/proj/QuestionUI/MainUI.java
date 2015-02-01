@@ -192,6 +192,7 @@ public class MainUI {
 						&& !mBank.isQuestionSelected()) {
 					modifyGroup.setVisible(true);
 				} else if (mBank.isQuestionSelected()) {
+					modifyQuestion.setQuestion(mBank.getCurrentQuestion());
 					modifyQuestion.setVisible(true);
 				}
 
@@ -231,9 +232,17 @@ public class MainUI {
 	}
 
 	public void refreshTree() {
-		root = new DefaultMutableTreeNode("Question Bank");
-		initTree();
-		treeModal.setRoot(root);
+		EventQueue.invokeLater(new Runnable() {
+
+			@Override
+			public void run() {
+				root = new DefaultMutableTreeNode("Question Bank");
+				initTree();
+				treeModal.setRoot(root);
+				mBank.reset();
+			}
+
+		});
 	}
 
 	private void initTree() {

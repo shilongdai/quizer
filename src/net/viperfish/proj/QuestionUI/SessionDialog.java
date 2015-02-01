@@ -114,6 +114,7 @@ public class SessionDialog extends JDialog {
 		{
 			txtrTheQuestion = new JTextArea();
 			txtrTheQuestion.setText("The question");
+			txtrTheQuestion.setEditable(false);
 			contentPanel.add(txtrTheQuestion, "2, 8, 3, 5, fill, fill");
 		}
 		{
@@ -136,7 +137,7 @@ public class SessionDialog extends JDialog {
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						boolean automaticScore = false;
-						// TODO Auto-generated method stub
+						double temp, score, size;
 						if (answering) {
 							toDisplayAnswer();
 							automaticScore = mQuizer.answer(textArea.getText());
@@ -150,8 +151,11 @@ public class SessionDialog extends JDialog {
 
 							if (mQuizer.done()) {
 								setVisible(false);
-								scoreBoard.setScore((mQuizer.getScore() / mQuizer
-										.getSessionSize()) * 100);
+								size = mQuizer.getSessionSize();
+								score = mQuizer.getScore();
+								temp = (score / size) * 100;
+								System.out.println("temp:" + temp);
+								scoreBoard.setScore(temp);
 								scoreBoard.setVisible(true);
 							} else {
 								reset();

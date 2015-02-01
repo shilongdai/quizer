@@ -344,7 +344,7 @@ public class Quizer {
 	 * increment score by 1
 	 */
 	public void incrementScore() {
-		++score;
+		score = score + 1;
 	}
 
 	/**

@@ -37,7 +37,7 @@ public class QuestionAddDialog extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public QuestionAddDialog(Quizer q, MainUI tree) {
+	public QuestionAddDialog(Quizer q, final MainUI tree) {
 		toAdd = new Question();
 		mQuizer = q;
 		setBounds(100, 100, 450, 300);
@@ -89,7 +89,9 @@ public class QuestionAddDialog extends JDialog {
 							lblQuestion.setText("Question:");
 							okButton.setText("Next");
 							mQuizer.addQuestion(toAdd);
+							tree.refreshTree();
 							setVisible(false);
+							toAdd = new Question();
 						}
 					}
 
@@ -99,7 +101,17 @@ public class QuestionAddDialog extends JDialog {
 			}
 			{
 				JButton cancelButton = new JButton("Cancel");
-				cancelButton.setActionCommand("Cancel");
+				cancelButton.addActionListener(new ActionListener() {
+
+					@Override
+					public void actionPerformed(ActionEvent arg0) {
+						textArea.setText("");
+						lblQuestion.setText("Question:");
+						okButton.setText("Next");
+						setVisible(false);
+					}
+
+				});
 				buttonPane.add(cancelButton);
 			}
 		}

@@ -14,10 +14,10 @@ import javax.swing.border.EmptyBorder;
 public class DisplayScoreDialog extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
-	private int toDisplay;
+	private double toDisplay;
 	private JLabel lblYourScoreIs;
 
-	public void setScore(int s) {
+	public void setScore(double s) {
 		toDisplay = s;
 		lblYourScoreIs.setText("Your Score Is:" + toDisplay);
 	}
