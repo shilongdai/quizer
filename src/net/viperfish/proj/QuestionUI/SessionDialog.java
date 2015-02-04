@@ -44,7 +44,7 @@ public class SessionDialog extends JDialog {
 	public SessionDialog(Quizer q) {
 		mQuizer = q;
 		scoreBoard = new DisplayScoreDialog();
-		setBounds(100, 100, 450, 375);
+		setBounds(100, 100, 450, 410);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -53,60 +53,52 @@ public class SessionDialog extends JDialog {
 				ColumnSpec.decode("default:grow"), FormFactory.DEFAULT_COLSPEC,
 				FormFactory.DEFAULT_COLSPEC, FormFactory.DEFAULT_COLSPEC, },
 				new RowSpec[] { FormFactory.RELATED_GAP_ROWSPEC,
-						FormFactory.DEFAULT_ROWSPEC,
+						FormFactory.PREF_ROWSPEC,
 						FormFactory.RELATED_GAP_ROWSPEC,
 						FormFactory.DEFAULT_ROWSPEC,
 						FormFactory.RELATED_GAP_ROWSPEC,
 						FormFactory.DEFAULT_ROWSPEC,
-						FormFactory.RELATED_GAP_ROWSPEC,
+						RowSpec.decode("max(75dlu;default)"),
 						FormFactory.DEFAULT_ROWSPEC,
+						RowSpec.decode("max(70dlu;default)"),
 						FormFactory.RELATED_GAP_ROWSPEC,
-						FormFactory.DEFAULT_ROWSPEC,
+						FormFactory.PREF_ROWSPEC,
 						FormFactory.RELATED_GAP_ROWSPEC,
-						FormFactory.DEFAULT_ROWSPEC,
 						FormFactory.RELATED_GAP_ROWSPEC,
-						FormFactory.DEFAULT_ROWSPEC,
-						FormFactory.RELATED_GAP_ROWSPEC,
-						FormFactory.DEFAULT_ROWSPEC,
-						FormFactory.RELATED_GAP_ROWSPEC,
-						FormFactory.DEFAULT_ROWSPEC,
-						FormFactory.RELATED_GAP_ROWSPEC,
-						FormFactory.DEFAULT_ROWSPEC,
-						FormFactory.RELATED_GAP_ROWSPEC,
-						RowSpec.decode("default:grow"), }));
+						FormFactory.DEFAULT_ROWSPEC, }));
 		{
-			lblCorrectOrNot = new JLabel("Correct or Not");
-			contentPanel.add(lblCorrectOrNot, "2, 4");
 		}
 		{
-			btnY = new JButton("Y");
-			btnY.addActionListener(new ActionListener() {
-
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					// TODO Auto-generated method stub
-					mQuizer.incrementScore();
-					btnY.setEnabled(false);
-					btnN.setEnabled(false);
-				}
-
-			});
-			contentPanel.add(btnY, "3, 4");
+			{
+				lblCorrectOrNot = new JLabel("Correct or Not");
+				contentPanel.add(lblCorrectOrNot, "2, 4");
+			}
 		}
-		{
-			btnN = new JButton("N");
-			btnN.addActionListener(new ActionListener() {
+		btnY = new JButton("Y");
+		btnY.addActionListener(new ActionListener() {
 
-				@Override
-				public void actionPerformed(ActionEvent arg0) {
-					// TODO Auto-generated method stub
-					btnY.setEnabled(false);
-					btnN.setEnabled(false);
-				}
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				mQuizer.incrementScore();
+				btnY.setEnabled(false);
+				btnN.setEnabled(false);
+			}
 
-			});
-			contentPanel.add(btnN, "4, 4");
-		}
+		});
+		contentPanel.add(btnY, "3, 4");
+		btnN = new JButton("N");
+		btnN.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				btnY.setEnabled(false);
+				btnN.setEnabled(false);
+			}
+
+		});
+		contentPanel.add(btnN, "4, 4");
 		{
 			lblQuestion = new JLabel("Question:");
 			contentPanel.add(lblQuestion, "2, 6");
@@ -115,16 +107,16 @@ public class SessionDialog extends JDialog {
 			txtrTheQuestion = new JTextArea();
 			txtrTheQuestion.setText("The question");
 			txtrTheQuestion.setEditable(false);
-			contentPanel.add(txtrTheQuestion, "2, 8, 3, 5, fill, fill");
+			contentPanel.add(txtrTheQuestion, "2, 7, fill, fill");
 		}
 		{
 			lblYourAnswer = new JLabel("Your Answer:");
-			contentPanel.add(lblYourAnswer, "2, 14");
+			contentPanel.add(lblYourAnswer, "2, 8");
 		}
 		{
 			textArea = new JTextArea();
 			textArea.setEditable(true);
-			contentPanel.add(textArea, "2, 15, 3, 7, fill, fill");
+			contentPanel.add(textArea, "2, 9, fill, fill");
 		}
 		{
 			JPanel buttonPane = new JPanel();

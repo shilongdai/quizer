@@ -13,6 +13,10 @@ import javax.swing.border.EmptyBorder;
 
 public class DisplayScoreDialog extends JDialog {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5820369899078381479L;
 	private final JPanel contentPanel = new JPanel();
 	private double toDisplay;
 	private JLabel lblYourScoreIs;
