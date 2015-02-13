@@ -10,6 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 
@@ -37,6 +38,8 @@ public class SessionDialog extends JDialog {
 	private JButton btnN;
 	private DisplayScoreDialog scoreBoard;
 	private boolean answering = true;
+	private JScrollPane scrollPane;
+	private JScrollPane scrollPane_1;
 
 	/**
 	 * Create the dialog.
@@ -51,27 +54,19 @@ public class SessionDialog extends JDialog {
 		contentPanel.setLayout(new FormLayout(new ColumnSpec[] {
 				FormFactory.RELATED_GAP_COLSPEC,
 				ColumnSpec.decode("default:grow"), FormFactory.DEFAULT_COLSPEC,
-				FormFactory.DEFAULT_COLSPEC, FormFactory.DEFAULT_COLSPEC, },
-				new RowSpec[] { FormFactory.RELATED_GAP_ROWSPEC,
-						FormFactory.PREF_ROWSPEC,
-						FormFactory.RELATED_GAP_ROWSPEC,
-						FormFactory.DEFAULT_ROWSPEC,
-						FormFactory.RELATED_GAP_ROWSPEC,
-						FormFactory.DEFAULT_ROWSPEC,
-						RowSpec.decode("max(75dlu;default)"),
-						FormFactory.DEFAULT_ROWSPEC,
-						RowSpec.decode("max(70dlu;default)"),
-						FormFactory.RELATED_GAP_ROWSPEC,
-						FormFactory.PREF_ROWSPEC,
-						FormFactory.RELATED_GAP_ROWSPEC,
-						FormFactory.RELATED_GAP_ROWSPEC,
-						FormFactory.DEFAULT_ROWSPEC, }));
+				FormFactory.DEFAULT_COLSPEC, }, new RowSpec[] {
+				FormFactory.RELATED_GAP_ROWSPEC, FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC, FormFactory.DEFAULT_ROWSPEC,
+				RowSpec.decode("max(75dlu;default)"),
+				FormFactory.DEFAULT_ROWSPEC,
+				RowSpec.decode("max(70dlu;default)"),
+				FormFactory.RELATED_GAP_ROWSPEC, }));
 		{
 		}
 		{
 			{
 				lblCorrectOrNot = new JLabel("Correct or Not");
-				contentPanel.add(lblCorrectOrNot, "2, 4");
+				contentPanel.add(lblCorrectOrNot, "2, 2");
 			}
 		}
 		btnY = new JButton("Y");
@@ -86,7 +81,7 @@ public class SessionDialog extends JDialog {
 			}
 
 		});
-		contentPanel.add(btnY, "3, 4");
+		contentPanel.add(btnY, "3, 2");
 		btnN = new JButton("N");
 		btnN.addActionListener(new ActionListener() {
 
@@ -98,25 +93,35 @@ public class SessionDialog extends JDialog {
 			}
 
 		});
-		contentPanel.add(btnN, "4, 4");
+		contentPanel.add(btnN, "4, 2");
 		{
 			lblQuestion = new JLabel("Question:");
-			contentPanel.add(lblQuestion, "2, 6");
+			contentPanel.add(lblQuestion, "2, 4");
 		}
 		{
-			txtrTheQuestion = new JTextArea();
-			txtrTheQuestion.setText("The question");
-			txtrTheQuestion.setEditable(false);
-			contentPanel.add(txtrTheQuestion, "2, 7, fill, fill");
+			scrollPane = new JScrollPane();
+			contentPanel.add(scrollPane, "2, 5, fill, fill");
+			{
+				txtrTheQuestion = new JTextArea();
+				txtrTheQuestion.setLineWrap(true);
+				scrollPane.setViewportView(txtrTheQuestion);
+				txtrTheQuestion.setText("The question");
+				txtrTheQuestion.setEditable(false);
+			}
 		}
 		{
 			lblYourAnswer = new JLabel("Your Answer:");
-			contentPanel.add(lblYourAnswer, "2, 8");
+			contentPanel.add(lblYourAnswer, "2, 6");
 		}
 		{
-			textArea = new JTextArea();
-			textArea.setEditable(true);
-			contentPanel.add(textArea, "2, 9, fill, fill");
+			scrollPane_1 = new JScrollPane();
+			contentPanel.add(scrollPane_1, "2, 7, fill, fill");
+			{
+				textArea = new JTextArea();
+				textArea.setLineWrap(true);
+				scrollPane_1.setViewportView(textArea);
+				textArea.setEditable(true);
+			}
 		}
 		{
 			JPanel buttonPane = new JPanel();

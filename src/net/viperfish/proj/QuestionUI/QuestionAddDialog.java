@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 
@@ -33,6 +34,7 @@ public class QuestionAddDialog extends JDialog {
 	JTextArea textArea;
 	JButton okButton;
 	JLabel lblQuestion;
+	private JScrollPane scrollPane;
 
 	/**
 	 * Create the dialog.
@@ -46,11 +48,6 @@ public class QuestionAddDialog extends JDialog {
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(new FormLayout(new ColumnSpec[] {
 				FormFactory.RELATED_GAP_COLSPEC, FormFactory.DEFAULT_COLSPEC,
-				FormFactory.RELATED_GAP_COLSPEC, FormFactory.DEFAULT_COLSPEC,
-				FormFactory.RELATED_GAP_COLSPEC, FormFactory.DEFAULT_COLSPEC,
-				FormFactory.RELATED_GAP_COLSPEC, FormFactory.DEFAULT_COLSPEC,
-				FormFactory.RELATED_GAP_COLSPEC, FormFactory.DEFAULT_COLSPEC,
-				FormFactory.RELATED_GAP_COLSPEC, FormFactory.DEFAULT_COLSPEC,
 				FormFactory.RELATED_GAP_COLSPEC,
 				ColumnSpec.decode("default:grow"), }, new RowSpec[] {
 				FormFactory.RELATED_GAP_ROWSPEC, FormFactory.DEFAULT_ROWSPEC,
@@ -58,12 +55,17 @@ public class QuestionAddDialog extends JDialog {
 				RowSpec.decode("default:grow"), }));
 		{
 			lblQuestion = new JLabel("Question:");
-			contentPanel.add(lblQuestion, "14, 2");
+			contentPanel.add(lblQuestion, "4, 2");
 		}
 		{
-			textArea = new JTextArea();
-			textArea.setEditable(true);
-			contentPanel.add(textArea, "2, 4, 13, 1, fill, fill");
+			scrollPane = new JScrollPane();
+			contentPanel.add(scrollPane, "2, 4, 3, 1, fill, fill");
+			{
+				textArea = new JTextArea();
+				textArea.setLineWrap(true);
+				scrollPane.setViewportView(textArea);
+				textArea.setEditable(true);
+			}
 		}
 		{
 			JPanel buttonPane = new JPanel();
