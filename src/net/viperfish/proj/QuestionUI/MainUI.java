@@ -69,6 +69,8 @@ public class MainUI {
 				try {
 					MainUI window = new MainUI();
 					window.frmQuizer.setVisible(true);
+					window.frmQuizer
+							.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
