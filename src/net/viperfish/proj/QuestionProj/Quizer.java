@@ -330,8 +330,9 @@ public class Quizer {
 		sessionSize = sessionQuestions.size();
 		if (sessionQuestions.isEmpty()) {
 			currentQuizQuestion = null;
+		} else {
+			currentQuizQuestion = sessionQuestions.getFirst();
 		}
-		currentQuizQuestion = sessionQuestions.getFirst();
 	}
 
 	/**
