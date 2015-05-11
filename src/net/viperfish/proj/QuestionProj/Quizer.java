@@ -300,7 +300,11 @@ public class Quizer {
 		score = 0;
 		sessionQuestions = (LinkedList<Question>) getAllQuestion();
 		sessionSize = sessionQuestions.size();
-		currentQuizQuestion = sessionQuestions.getFirst();
+		if (sessionQuestions.isEmpty()) {
+			currentQuizQuestion = null;
+		} else {
+			currentQuizQuestion = sessionQuestions.getFirst();
+		}
 	}
 
 	/**
