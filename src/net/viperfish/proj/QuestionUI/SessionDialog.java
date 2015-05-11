@@ -135,25 +135,41 @@ public class SessionDialog extends JDialog {
 					public void actionPerformed(ActionEvent e) {
 						boolean automaticScore = false;
 						double temp, score, size;
+						String userAnswer;
 						if (answering) {
 							toDisplayAnswer();
-							automaticScore = mQuizer.answer(textArea.getText());
+							userAnswer = textArea.getText();
+							automaticScore = mQuizer.answer(userAnswer);
 							if (automaticScore) {
-								lblCorrectOrNot.setText("Correct");
-								btnY.setEnabled(false);
-								btnN.setEnabled(false);
+								EventQueue.invokeLater(new Runnable() {
+
+									@Override
+									public void run() {
+										lblCorrectOrNot.setText("Correct");
+										btnY.setVisible(false);
+										btnN.setVisible(false);
+									}
+
+								});
 							}
 							answering = false;
 						} else if (!answering) {
 
 							if (mQuizer.done()) {
-								setVisible(false);
+
 								size = mQuizer.getSessionSize();
 								score = mQuizer.getScore();
 								temp = (score / size) * 100;
-								System.out.println("temp:" + temp);
 								scoreBoard.setScore(temp);
-								scoreBoard.setVisible(true);
+								EventQueue.invokeLater(new Runnable() {
+
+									@Override
+									public void run() {
+										setVisible(false);
+										scoreBoard.setVisible(true);
+									}
+
+								});
 							} else {
 								reset();
 							}

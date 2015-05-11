@@ -364,10 +364,14 @@ public class Quizer {
 	 */
 
 	public boolean answer(String answer) {
-		if (answer == currentQuizQuestion.getAnswer()) {
+		if (answer.equals(currentQuizQuestion.getAnswer())) {
 			++score;
 			sessionQuestions.pop();
-			currentQuizQuestion = sessionQuestions.getFirst();
+			if (!sessionQuestions.isEmpty()) {
+				currentQuizQuestion = sessionQuestions.getFirst();
+			} else {
+				currentQuizQuestion = null;
+			}
 			return true;
 		} else {
 			sessionQuestions.pop();
