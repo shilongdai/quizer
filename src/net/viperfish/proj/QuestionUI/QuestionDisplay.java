@@ -8,7 +8,7 @@ public class QuestionDisplay {
 
 	public QuestionDisplay(Question q) {
 		if (q.getQuestion().length() > 25) {
-			content = q.getQuestion().substring(0, 25);
+			content = q.getQuestion().substring(0, 25) + "...";
 		} else {
 			content = q.getQuestion();
 		}

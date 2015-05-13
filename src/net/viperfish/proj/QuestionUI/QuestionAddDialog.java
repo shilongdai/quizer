@@ -1,6 +1,7 @@
 package net.viperfish.proj.QuestionUI;
 
 import java.awt.BorderLayout;
+import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -77,24 +78,33 @@ public class QuestionAddDialog extends JDialog {
 
 					@Override
 					public void actionPerformed(ActionEvent arg0) {
-						// TODO Auto-generated method stub
-						if (!questionSet) {
-							toAdd.setQuestion(textArea.getText());
-							questionSet = true;
-							textArea.setText("");
-							lblQuestion.setText("Answer:");
-							okButton.setText("Done");
-						} else {
-							toAdd.setAnswer(textArea.getText());
-							questionSet = false;
-							textArea.setText("");
-							lblQuestion.setText("Question:");
-							okButton.setText("Next");
-							mQuizer.addQuestion(toAdd);
-							tree.refreshTree();
-							setVisible(false);
-							toAdd = new Question();
-						}
+						EventQueue.invokeLater(new Runnable() {
+
+							@Override
+							public void run() {
+								// TODO Auto-generated method stub
+								// TODO Auto-generated method stub
+								if (!questionSet) {
+									toAdd.setQuestion(textArea.getText());
+									questionSet = true;
+									textArea.setText("");
+									lblQuestion.setText("Answer:");
+									okButton.setText("Done");
+								} else {
+									toAdd.setAnswer(textArea.getText());
+									questionSet = false;
+									textArea.setText("");
+									lblQuestion.setText("Question:");
+									okButton.setText("Next");
+									mQuizer.addQuestion(toAdd);
+									tree.refreshTree();
+									setVisible(false);
+									toAdd = new Question();
+								}
+							}
+
+						});
+
 					}
 
 				});

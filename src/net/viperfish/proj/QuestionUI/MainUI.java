@@ -183,29 +183,6 @@ public class MainUI {
 		});
 		toolBar.add(btnDelete);
 
-		JButton btnModify = new JButton("Modify");
-		btnModify.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if (mBank.isCategorySelected() && !mBank.isGroupSelected()) {
-					modifyCategory.setVisible(true);
-				} else if (mBank.isGroupSelected()
-						&& !mBank.isQuestionSelected()) {
-					modifyGroup.setVisible(true);
-				} else if (mBank.isQuestionSelected()) {
-					modifyQuestion.setQuestion(mBank.getCurrentQuestion());
-					modifyQuestion.setVisible(true);
-				}
-
-			}
-
-		});
-		toolBar.add(btnModify);
-
-		JButton btnNewButton_1 = new JButton("View");
-		toolBar.add(btnNewButton_1);
-
 		JScrollPane scrollPane = new JScrollPane();
 		frmQuizer.getContentPane().add(scrollPane, BorderLayout.CENTER);
 
