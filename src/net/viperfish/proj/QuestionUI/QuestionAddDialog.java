@@ -117,10 +117,15 @@ public class QuestionAddDialog extends JDialog {
 
 					@Override
 					public void actionPerformed(ActionEvent arg0) {
-						textArea.setText("");
-						lblQuestion.setText("Question:");
-						okButton.setText("Next");
-						setVisible(false);
+						EventQueue.invokeLater(new Runnable() {
+							@Override
+							public void run() {
+								textArea.setText("");
+								lblQuestion.setText("Question:");
+								okButton.setText("Next");
+								setVisible(false);
+							}
+						});
 					}
 
 				});
